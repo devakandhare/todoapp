@@ -29,8 +29,12 @@
   display: flex;
   border-bottom: 1px solid #2980b9;
 }
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .delete-icon {
-  margin-top: 9px;
   color: #e82f19;
   cursor: pointer;
 }
