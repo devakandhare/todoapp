@@ -8,8 +8,8 @@ function App() {
   const addTask = (event) => {
     event.preventDefault();
     setTasks((prevState) => [
-      ...prevState,
       { text: currentTask, status: "NEW" },
+      ...prevState,
     ]);
     setCurrentTask("");
   };
@@ -38,27 +38,46 @@ function App() {
         </div>
         <ul className="task-list">
           {tasks.map((task) => (
-            <li
-              key={task.text}
-              onClick={() => {
-                setTasks((prevState) =>
-                  prevState.map((theTask) => ({
-                    ...theTask,
-                    status:
-                      theTask.text === task.text ? "COMPLETED" : task.status,
-                  }))
-                );
-              }}
-              style={
-                task.status === "COMPLETED"
-                  ? { textDecoration: "line-through" }
-                  : {}
-              }
-            >
-              {task.text}
-            </li>
+            <div className="task" key={task.text}>
+              <li
+                style={
+                  task.status === "COMPLETED"
+                    ? { textDecoration: "line-through" }
+                    : {}
+                }
+              >
+                {task.text}
+              </li>
+              <input
+                type="checkbox"
+                value={task.text}
+                onChange={(event) => {
+                  setTasks((prevState) =>
+                    prevState.map((theTask) => ({
+                      ...theTask,
+                      status:
+                        theTask.text === event.target.value
+                          ? event.target.checked
+                            ? "COMPLETED"
+                            : "PENDING"
+                          : theTask.status,
+                    }))
+                  );
+                }}
+              />
+            </div>
           ))}
         </ul>
+        <button
+          className="btn"
+          onClick={() => {
+            setTasks((prevTasks) =>
+              prevTasks.filter((theTask) => theTask.status !== "COMPLETED")
+            );
+          }}
+        >
+          Clear Completed Tasks
+        </button>
       </div>
     </>
   );
