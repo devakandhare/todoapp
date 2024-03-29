@@ -66,7 +66,7 @@ function App() {
                   );
                 }}
               />
-              <span>
+              <span className="icon-container">
                 <MdDelete
                   className="delete-icon"
                   onClick={() => {
