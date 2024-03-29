@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { MdDelete } from "react-icons/md";
 
 function App() {
   const [currentTask, setCurrentTask] = useState("");
@@ -65,6 +66,16 @@ function App() {
                   );
                 }}
               />
+              <span>
+                <MdDelete
+                  className="delete-icon"
+                  onClick={() => {
+                    setTasks((prevTasks) =>
+                      prevTasks.filter((theTask) => theTask.text !== task.text)
+                    );
+                  }}
+                />
+              </span>
             </div>
           ))}
         </ul>
